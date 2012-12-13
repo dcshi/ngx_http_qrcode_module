@@ -21,10 +21,12 @@ ngx_http_qrcode_module is a an addon for Nginx to generate and serve QR code.
         qrcode_version 2;
         qrcode_txt "http://wwww.dcshi.com";
         qrcode_casesensitive on; 
-        qrcode_gen;
-    }   
-}
-
+        qrcode_gen;                                                                                                                                                        
+      }   
+    }
+   
+visit http://localhost/qr
+    
 ## Dependencies
     ngx_http_qrcode_module depends upon libqrencode and libgd. Please install these first.
 manual of libqrencode : http://fukuchi.org/works/qrencode/manual/
