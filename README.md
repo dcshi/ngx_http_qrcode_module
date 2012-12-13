@@ -88,7 +88,7 @@ Refer to http://wiki.nginx.org/3rdPartyModules.
 <br/>
 
 **Syntax**: ***qrcode_txt*** txt           
-**Default**: qrcode_txt ""    
+**Default**: none    
 **Context**: http, server, location        
 **Description**: the txt you want to encode. the max size is 1M
 <br/>
