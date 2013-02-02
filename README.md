@@ -48,14 +48,19 @@ curl "http://localhost/qr?ize=6&fg_color=00FF00&bg_color=fff700&case=1&txt=12a&m
 Dependencies
 ============
 ngx_http_qrcode_module depends upon libqrencode and libgd. Please install these first.
+<br/>
 manual of libqrencode : http://fukuchi.org/works/qrencode/manual/
 
 Installation
 ============
-Clone this responsitory git clone git@github.com:dcshi/ngx_http_qrcode_module.git
+Clone this responsitory git clone git@github.com:dcshi/ngx_http_qrcode_module.git.
+<br/>
 Download the Nginx source, extract and change the current working directory to the Nginx tree.
+<br/>
 Run configure with --add-module=/path/to/source/ngx_http_qrcode_module 
+<br/>
 Run make and make install. make install will probably need root permissions.
+<br/>
     
 Refer to http://wiki.nginx.org/3rdPartyModules.
 
