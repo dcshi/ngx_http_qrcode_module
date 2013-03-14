@@ -93,13 +93,13 @@ Directives
 **Syntax**: ***qrcode_size*** size    
 **Default**: qrcode_size 4      
 **Context**: http, server, location    
-**Description**: size of qrcode image.
+**Description**: size of qrcode image.(pixel)
 <br/>
 
 **Syntax**: ***qrcode_margin*** margin  
 **Default**: qrcode_margin 4  
 **Context**: http, server, location    
-**Description**: margin of qrcode image.
+**Description**: margin of qrcode image.(pixel)
 <br/>
 
 **Syntax**: ***qrcode_version*** version   

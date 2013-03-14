@@ -315,9 +315,13 @@ ngx_http_qrcode_handler(ngx_http_request_t* r)
 		return NGX_HTTP_INTERNAL_SERVER_ERROR;
 	}
 
-	code_size	= qlcf->size;
+	code_size	= qlcf->size / code->width;
+	code_size   = (code_size == 0) ? 1 : code_size;
 	img_margin	= qlcf->margin;
 	img_width	= code->width * code_size + 2 * img_margin;
+
+	ngx_log_error(NGX_LOG_ERR, r->connection->log, 0, "img_width,%d, code_size%d,code->width:%d", 
+			img_width, code_size, code->width);
 
 	gdImagePtr img;
 	img	= gdImageCreate(img_width, img_width);
