@@ -289,7 +289,7 @@ ngx_http_qrcode_handler(ngx_http_request_t* r)
 	ngx_int_t 	img_margin, img_width;
 	ngx_int_t 	fg_color, bg_color;
 	ngx_int_t 	x, y, posx, posy;
-	ngx_int_t 	img_stream_len;
+	int 		img_stream_len;
 	u_char		*encoded_txt;
 	ngx_int_t	rc;
 	
