@@ -433,7 +433,9 @@ ngx_http_qrcode_cmder(ngx_http_qrcode_cfg_t cfg_code,
 		if (arg == NULL)
 			return NGX_CONF_ERROR;
 
-		arg->raw_value = raw_args[i];
+		arg->raw_value 	= raw_args[i];
+		arg->lengths 	= NULL;
+		arg->values 	= NULL;
 
 		n = ngx_http_script_variables_count(&arg->raw_value);
 
