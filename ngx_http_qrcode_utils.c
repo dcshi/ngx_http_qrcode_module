@@ -205,13 +205,20 @@ ngx_http_qrcode_set_casesensitive(ngx_http_request_t *r, ngx_int_t *val, ngx_arr
 ngx_int_t 
 ngx_http_qrcode_set_content(ngx_http_request_t *r, ngx_str_t *val, ngx_array_t *compiled_args)
 {
-	ngx_str_t *arg;
+        ngx_str_t *arg;
+        u_char    *unescape_arg, *p;
 
-	arg = compiled_args->elts;
+        arg = compiled_args->elts;
 
-	*val = arg[0];
+        unescape_arg = ngx_palloc(r->pool, arg[0].len);
+        p = unescape_arg;
 
-	return NGX_OK;
+        ngx_unescape_uri(&p, &arg[0].data, arg[0].len, NGX_UNESCAPE_URI);
+
+        val->data = unescape_arg;
+        val->len  = p - unescape_arg;
+
+        return NGX_OK;
 }
 
 ngx_int_t 
