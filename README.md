@@ -23,7 +23,7 @@ Examples
         qrcode_margin 2;
         qrcode_version 2;
         qrcode_txt "http://wwww.dcshi.com";
-        qrcode_casesensitive on; 
+        qrcode_casesensitive 1; 
         qrcode_gen;                                                                                                                                                        
       }
 
