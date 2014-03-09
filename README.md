@@ -23,7 +23,7 @@ Examples
         qrcode_margin 2;
         qrcode_version 2;
         qrcode_txt "http://wwww.dcshi.com";
-        qrcode_casesensitive on; 
+        qrcode_casesensitive 1; 
         qrcode_gen;                                                                                                                                                        
       }
 
@@ -44,7 +44,7 @@ Examples
 	  }  
     }
    
-curl "http://localhost/qr?ize=6&fg_color=00FF00&bg_color=fff700&case=1&txt=12a&margin=2&level=0&hint=2&ver=2"
+curl "http://localhost/qr?size=6&fg_color=00FF00&bg_color=fff700&case=1&txt=12a&margin=2&level=0&hint=2&ver=2"
     
 Dependencies
 ============
