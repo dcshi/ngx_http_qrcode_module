@@ -22,6 +22,7 @@ typedef enum {
 	qrcode_cfg_margin,
 	qrcode_cfg_version,
 	qrcode_cfg_txt,
+	qrcode_cfg_urlencode_txt,
 	qrcode_cfg_casesensitive,
 } ngx_http_qrcode_cfg_t;
 

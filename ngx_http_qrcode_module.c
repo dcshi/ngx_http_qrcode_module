@@ -40,6 +40,9 @@ static char *
 ngx_http_qrcode_txt(ngx_conf_t *cf, ngx_command_t *cmd, void *conf);
 
 static char *
+ngx_http_qrcode_urlencode_txt(ngx_conf_t *cf, ngx_command_t *cmd, void *conf);
+
+static char *
 ngx_http_qrcode_gen(ngx_conf_t *cf, ngx_command_t *cmd, void *conf);
 
 static ngx_int_t 
@@ -119,6 +122,14 @@ static ngx_command_t  ngx_http_qrcode_commands[] = {
 		NGX_HTTP_LOC_CONF_OFFSET,
 		offsetof(ngx_http_qrcode_loc_conf_t, txt),
 		NULL },
+	{ 
+		ngx_string("qrcode_urlencode_txt"),
+		NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1,
+		ngx_http_qrcode_urlencode_txt,
+		NGX_HTTP_LOC_CONF_OFFSET,
+		offsetof(ngx_http_qrcode_loc_conf_t, txt),
+		NULL },
+
 	{ 
 		ngx_string("qrcode_gen"),
 		NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1|NGX_CONF_NOARGS,
@@ -271,6 +282,12 @@ ngx_http_qrcode_txt(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
 }
 
 static char *
+ngx_http_qrcode_urlencode_txt(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
+{
+	return ngx_http_qrcode_cmder(qrcode_cfg_urlencode_txt, cf, cmd, conf);
+}
+
+static char *
 ngx_http_qrcode_gen(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
 {
 	ngx_http_core_loc_conf_t *core_conf = 
@@ -319,9 +336,6 @@ ngx_http_qrcode_handler(ngx_http_request_t* r)
 	code_size   = (code_size == 0) ? 1 : code_size;
 	img_margin	= qlcf->margin;
 	img_width	= code->width * code_size + 2 * img_margin;
-
-	ngx_log_error(NGX_LOG_ERR, r->connection->log, 0, "img_width,%d, code_size%d,code->width:%d", 
-			img_width, code_size, code->width);
 
 	gdImagePtr img;
 	img	= gdImageCreate(img_width, img_width);

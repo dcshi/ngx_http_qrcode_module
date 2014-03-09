@@ -33,7 +33,7 @@ ngx_int_t
 ngx_http_qrcode_set_casesensitive(ngx_http_request_t *r, ngx_int_t *val, ngx_array_t *compiled_args);
 
 ngx_int_t 
-ngx_http_qrcode_set_content(ngx_http_request_t *r, ngx_str_t *val, ngx_array_t *compiled_args);
+ngx_http_qrcode_set_content(ngx_http_request_t *r, ngx_str_t *val, ngx_array_t *compiled_args, ngx_int_t urlencode);
 
 ngx_int_t 
 ngx_http_qrcode_eval_cmd_args(ngx_http_request_t *r,
@@ -203,17 +203,25 @@ ngx_http_qrcode_set_casesensitive(ngx_http_request_t *r, ngx_int_t *val, ngx_arr
 }
 
 ngx_int_t 
-ngx_http_qrcode_set_content(ngx_http_request_t *r, ngx_str_t *val, ngx_array_t *compiled_args)
+ngx_http_qrcode_set_content(ngx_http_request_t *r, ngx_str_t *val, ngx_array_t *compiled_args, ngx_int_t urlencode)
 {
 	ngx_str_t *arg;
+	u_char *p;
 
 	arg = compiled_args->elts;
-
 	*val = arg[0];
+
+	if (urlencode == 1) {
+		p = ngx_pcalloc(r->pool, arg->len);
+		val->data = p;
+
+		ngx_unescape_uri(&p, &arg->data, arg->len, 0);
+		val->len = p - val->data;
+	}
 
 	return NGX_OK;
 }
-
+  
 ngx_int_t 
 ngx_http_qrcode_eval_cmd_args(ngx_http_request_t *r,
 		ngx_http_qrcode_cmd_t *cmd, ngx_array_t *compiled_args)
@@ -308,7 +316,10 @@ ngx_http_qrcode_compile_args(ngx_http_request_t *r, ngx_http_qrcode_loc_conf_t *
 				rc = ngx_http_qrcode_set_version(r, &qlcf->version, compiled_args);
 				break;
 			case qrcode_cfg_txt:
-				rc = ngx_http_qrcode_set_content(r, &qlcf->txt, compiled_args);
+				rc = ngx_http_qrcode_set_content(r, &qlcf->txt, compiled_args, 0);
+				break;
+			case qrcode_cfg_urlencode_txt:
+				rc = ngx_http_qrcode_set_content(r, &qlcf->txt, compiled_args, 1);
 				break;
 			case qrcode_cfg_casesensitive:
 				rc = ngx_http_qrcode_set_casesensitive(r, &qlcf->casesensitive, compiled_args);

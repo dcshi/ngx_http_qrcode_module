@@ -38,6 +38,7 @@ Examples
 		qrcode_version $arg_ver;
 		qrcode_casesensitive $arg_case;
 		qrcode_txt $arg_txt;
+		#qrcode_urlencode_txt $arg_txt;
 
 		qrcode_gen;
 	  }  
@@ -120,12 +121,18 @@ Directives
 **Description**: the txt you want to encode. 
 <br/>
 
+**Syntax**: ***qrcode_urlencode_txt*** txt           
+**Default**: none    
+**Context**: http, server, location        
+**Description**: the txt you want to encode. Different from qrcode_txt, the directive will urldecode first. Just http%3a%2f%2fdcshi.com%3fa%3db%26c%3dd => http://dcshi.com?a=b&c=d
+<br/>
+  
 **Syntax**: ***qrcode_gen***      
 **Default**: none  
 **Context**: http, server, location      
 **Description**: generate QRcode.
 <br/>
-
+ 
 Author
 ======
 dcshi(施俊伟) <dcshi@qq.com>
